@@ -14,7 +14,6 @@
 #sudo service cron reload
 
 function checkAndLogin {
-  DBG=true
 
   [[ $DBG ]] && echo "Trying to access google"
 
@@ -26,10 +25,6 @@ function checkAndLogin {
   then
     [[ $DBG ]] && echo OK
   else
-    [[ $DBG ]] && echo "Reading url and queryfrom file"
-    url=$(<url)
-    query=$(<query)
-
     [[ $DBG ]] && echo "Captive Portal - sending POST"
     curl \
     -d "${query}" \
@@ -37,4 +32,8 @@ function checkAndLogin {
   fi
 }
 
+DBG=true
+[[ $DBG ]] && echo "Reading url and queryfrom file"
+url=$(<url)
+query=$(<query)
 for i in {1..60}; do checkAndLogin & sleep 1; done
