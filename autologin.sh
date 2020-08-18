@@ -34,6 +34,6 @@ function checkAndLogin {
 
 DBG=true
 [[ $DBG ]] && echo "Reading url and query from file"
-url=$(<url)
-query=$(<query)
+url=$(<~/AutoLoginCaptivePortal/url)
+query=$(<~/AutoLoginCaptivePortal/query)
 for i in {1..60}; do checkAndLogin & sleep 1; done
