@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 #simple script checking connection and autologin to captive portal
 
-#extract post url with browser developer tool and put it in url file
-#extract query with browser developer tool and put it in query file
+#extract post url with browser developer tool and put it in ~/AutoLoginCaptivePortal/url
+#extract query with browser developer tool and put it in ~/AutoLoginCaptivePortal/query
 
 #make autologin.sh executable
 #chmod +x autologin.sh
@@ -26,6 +26,11 @@ function checkAndLogin {
     [[ $DBG ]] && echo OK
   else
     [[ $DBG ]] && echo "Captive Portal - sending POST"
+
+    [[ $DBG ]] && echo "Reading url and query from file"
+    url=$(<~/AutoLoginCaptivePortal/url)
+    query=$(<~/AutoLoginCaptivePortal/query)
+
     curl \
     -d "${query}" \
     "${url}" -v
@@ -33,7 +38,4 @@ function checkAndLogin {
 }
 
 DBG=true
-[[ $DBG ]] && echo "Reading url and query from file"
-url=$(<~/AutoLoginCaptivePortal/url)
-query=$(<~/AutoLoginCaptivePortal/query)
 for i in {1..60}; do checkAndLogin & sleep 1; done
