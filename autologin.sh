@@ -26,12 +26,13 @@ function checkAndLogin {
   then
     [[ $DBG ]] && echo OK
   else
-    [[ $DBG ]] && echo "Reading url from file"
+    [[ $DBG ]] && echo "Reading url and queryfrom file"
     url=$(<url)
+    query=$(<query)
 
     [[ $DBG ]] && echo "Captive Portal - sending POST"
     curl \
-    -d @query \
+    -d "${query}" \
     "${url}" -v
   fi
 }
