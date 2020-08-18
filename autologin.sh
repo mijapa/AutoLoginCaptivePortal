@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 #simple script checking connection and autologin to captive portal
 
 #extract post url with browser developer tool and put it in url file
@@ -33,7 +33,7 @@ function checkAndLogin {
 }
 
 DBG=true
-[[ $DBG ]] && echo "Reading url and queryfrom file"
+[[ $DBG ]] && echo "Reading url and query from file"
 url=$(<url)
 query=$(<query)
 for i in {1..60}; do checkAndLogin & sleep 1; done
